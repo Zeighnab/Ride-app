@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import PageBar from './components/layout/PageBar';
+import NearestRide from './Pages/NearestRide';
+import UpcomingRide from './Pages/UpcomingRide';
+import PastRide from './Pages/PastRide';
+import { RideProvider } from './context/RideContext';
+
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RideProvider>
+      <Router>
+        <div className="flex flex-col h-screen">
+          <Navbar />
+
+          <PageBar />
+
+          <main>
+            <Routes>
+              <Route path="/" element={<NearestRide />} />
+              <Route path="/upcoming" element={<UpcomingRide />} />
+              <Route path="/past" element={<PastRide />} />
+            </Routes>
+          </main>
+        </div>
+      </Router>
+    </RideProvider>
   );
 }
 
